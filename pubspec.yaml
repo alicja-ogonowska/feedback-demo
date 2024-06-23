@@ -43,6 +43,8 @@ dependencies:
   firebase_core: ^3.1.0
   firebase_remote_config: ^5.0.1
   firebase_analytics: ^11.0.1
+  firebase_installations: ^16.3.6
+  firebase_messaging: ^15.0.1
 
 dev_dependencies:
   flutter_test:

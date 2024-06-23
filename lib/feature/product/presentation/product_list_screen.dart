@@ -1,3 +1,5 @@
+import 'package:feedback_demo/di/service_locator.dart';
+import 'package:feedback_demo/feature/ab_testing/presentation/ab_test_cubit.dart';
 import 'package:feedback_demo/feature/product/data/model/product.dart';
 import 'package:feedback_demo/feature/product/presentation/product_screen.dart';
 import 'package:feedback_demo/feature/product/presentation/products_cubit.dart';
@@ -77,7 +79,11 @@ class _ProductItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ProductScreen(product: product),
+            builder: (context) => BlocProvider(
+              create: (_) => getIt.get<ABTestCubit>()..loadExperiments(),
+              lazy: false,
+              child: ProductScreen(product: product),
+            ),
           ),
         );
       },
@@ -93,7 +99,7 @@ class _ProductItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child:Hero(
+              child: Hero(
                 tag: product.image,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

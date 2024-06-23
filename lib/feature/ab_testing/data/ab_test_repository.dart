@@ -1,6 +1,6 @@
-import 'package:feedback_demo/feature/ab_testing/data/remote_value_data_source.dart';
 import 'package:feedback_demo/feature/ab_testing/data/experiment_config.dart';
 import 'package:feedback_demo/feature/ab_testing/data/model/ab_experiment.dart';
+import 'package:feedback_demo/feature/ab_testing/data/remote_value_data_source.dart';
 
 class ABTestRepository {
   final RemoteValueDataSource dataSource;
@@ -8,15 +8,17 @@ class ABTestRepository {
   ABTestRepository({required this.dataSource});
 
   T getExperimentValue<T>(ABExperiment<T> experiment) {
+    late T? value;
     if (experiment is BooleanExperiment) {
-      return dataSource.getBool(experiment.key) as T;
+      value = dataSource.getBool(experiment.key) as T?;
     } else if (experiment is StringExperiment) {
-      return dataSource.getString(experiment.key) as T;
+      value = dataSource.getString(experiment.key) as T?;
     } else if (experiment is IntExperiment) {
-      return dataSource.getInt(experiment.key) as T;
+      value = dataSource.getInt(experiment.key) as T?;
     } else {
       throw UnsupportedError('Unsupported experiment type');
     }
+    return value ?? experiment.defaultValue;
   }
 
   ExperimentConfig getExperimentValues(ExperimentConfig config) {
