@@ -1,4 +1,3 @@
-import 'package:amplitude_flutter/amplitude.dart';
 import 'package:feedback_demo/di/service_locator.dart';
 import 'package:feedback_demo/feature/ab_testing/presentation/ab_test_cubit.dart';
 import 'package:feedback_demo/feature/analytics/analytics_service.dart';
@@ -110,11 +109,10 @@ class ProductScreen extends StatelessWidget {
                   content: Text('Item purchased!'),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
                 getIt
                     .get<AnalyticsService>()
                     .logPurchase(amount: product.price, currency: 'USD');
-                // _showPromoterSurvey(context);
+                _showPromoterSurvey(context);
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -144,11 +142,8 @@ class ProductScreen extends StatelessWidget {
     Wiredash.of(context).showPromoterSurvey(
       force: true,
       options: const PsOptions(
-        // minimum time between two surveys
         frequency: Duration(days: 90),
-        // delay before the first survey is available
         initialDelay: Duration(days: 7),
-        // minimum number of app starts before the survey will be shown
         minimumAppStarts: 3,
       ),
     );
