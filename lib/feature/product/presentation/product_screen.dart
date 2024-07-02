@@ -1,3 +1,4 @@
+import 'package:amplitude_flutter/amplitude.dart';
 import 'package:feedback_demo/di/service_locator.dart';
 import 'package:feedback_demo/feature/ab_testing/presentation/ab_test_cubit.dart';
 import 'package:feedback_demo/feature/analytics/analytics_service.dart';
@@ -117,7 +118,7 @@ class ProductScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                backgroundColor: state.config.addToCartAccentColorValue
+                backgroundColor: state.config.useAccentColorCTA
                     ? Colors.orange
                     : primaryColor,
                 shape: RoundedRectangleBorder(

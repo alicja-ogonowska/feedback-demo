@@ -79,9 +79,8 @@ class _ProductItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => BlocProvider(
-              create: (_) => getIt.get<ABTestCubit>()..loadExperiments(),
-              lazy: false,
+            builder: (context) => BlocProvider.value(
+              value: getIt.get<ABTestCubit>(),
               child: ProductScreen(product: product),
             ),
           ),

@@ -2,16 +2,16 @@ import 'package:feedback_demo/feature/ab_testing/data/model/ab_experiment.dart';
 
 class ExperimentConfig {
   final List<ABExperiment> experiments;
-  final BooleanExperiment addToCartAccentColor;
+  final BooleanExperiment _addToCartAccentColor;
 
   ExperimentConfig()
-      : addToCartAccentColor = BooleanExperiment(
+      : _addToCartAccentColor = BooleanExperiment(
           key: "add_to_cart_accent_color",
           defaultValue: false,
         ),
         experiments = [] {
-    experiments.add(addToCartAccentColor);
+    experiments.add(_addToCartAccentColor);
   }
 
-  bool get addToCartAccentColorValue => addToCartAccentColor.value;
+  bool get useAccentColorCTA => _addToCartAccentColor.value;
 }

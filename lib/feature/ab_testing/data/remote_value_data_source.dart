@@ -1,7 +1,7 @@
 abstract class RemoteValueDataSource {
-  String? getString(String key);
+  Future<String?> getString(String key);
 
-  int? getInt(String key);
+  Future<int?> getInt(String key);
 
-  bool? getBool(String key);
+  Future<bool?> getBool(String key);
 }

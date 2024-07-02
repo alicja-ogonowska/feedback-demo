@@ -7,24 +7,25 @@ class ABTestRepository {
 
   ABTestRepository({required this.dataSource});
 
-  T getExperimentValue<T>(ABExperiment<T> experiment) {
-    late T? value;
+  Future<T> getExperimentValue<T>(ABExperiment<T> experiment) async {
+    Future<T?>? valueFuture;
     if (experiment is BooleanExperiment) {
-      value = dataSource.getBool(experiment.key) as T?;
+      valueFuture = dataSource.getBool(experiment.key) as Future<T?>?;
     } else if (experiment is StringExperiment) {
-      value = dataSource.getString(experiment.key) as T?;
+      valueFuture = dataSource.getString(experiment.key) as Future<T?>?;
     } else if (experiment is IntExperiment) {
-      value = dataSource.getInt(experiment.key) as T?;
+      valueFuture = dataSource.getInt(experiment.key) as Future<T?>?;
     } else {
       throw UnsupportedError('Unsupported experiment type');
     }
-    return value ?? experiment.defaultValue;
+
+    return (await valueFuture) ?? experiment.defaultValue;
   }
 
-  ExperimentConfig getExperimentValues(ExperimentConfig config) {
-    for (var experiment in config.experiments) {
-      experiment.value = getExperimentValue(experiment);
-    }
+  Future<ExperimentConfig> getExperimentValues(ExperimentConfig config) async {
+    await Future.wait(config.experiments.map((experiment) async {
+      experiment.value = await getExperimentValue(experiment);
+    }));
     return config;
   }
 }

@@ -1,13 +1,12 @@
-import 'package:equatable/equatable.dart';
-
-abstract class ABExperiment<T>{
+abstract class ABExperiment<T> {
   final String key;
   final T defaultValue;
   T value;
 
-  ABExperiment({required this.key, required this.defaultValue})
-      : value = defaultValue;
-
+  ABExperiment({
+    required this.key,
+    required this.defaultValue,
+  }) : value = defaultValue;
 }
 
 class BooleanExperiment extends ABExperiment<bool> {

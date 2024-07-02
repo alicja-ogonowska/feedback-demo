@@ -19,20 +19,18 @@ class RemoteConfigRemoteValueDataSource implements RemoteValueDataSource {
     _values = _remoteConfig.getAll();
   }
 
-
-
   @override
-  bool? getBool(String key) {
+  Future<bool?> getBool(String key) async {
     return _values?[key]?.asBool();
   }
 
   @override
-  int? getInt(String key) {
+  Future<int?> getInt(String key) async {
     return _values?[key]?.asInt();
   }
 
   @override
-  String? getString(String key) {
+  Future<String?> getString(String key) async {
     return _values?[key]?.asString();
   }
 }

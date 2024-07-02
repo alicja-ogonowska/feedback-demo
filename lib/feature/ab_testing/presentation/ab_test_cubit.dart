@@ -7,11 +7,13 @@ class ABTestCubit extends Cubit<ABTestState> {
   final ABTestRepository repository;
   final ExperimentConfig config;
 
-  ABTestCubit({required this.repository, required this.config})
-      : super(ABTestState(config));
+  ABTestCubit({
+    required this.repository,
+    required this.config,
+  }) : super(ABTestState(config));
 
   void loadExperiments() async {
-    final result = repository.getExperimentValues(config);
+    final result = await repository.getExperimentValues(config);
     emit(ABTestState(result));
   }
 }

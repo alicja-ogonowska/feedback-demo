@@ -2,17 +2,17 @@ import 'package:feedback_demo/feature/ab_testing/data/remote_value_data_source.d
 
 class MockRemoteValueDataSource implements RemoteValueDataSource {
   @override
-  bool? getBool(String key) {
+  Future<bool?> getBool(String key) async {
     return true;
   }
 
   @override
-  int? getInt(String key) {
+  Future<int?> getInt(String key) async {
     return 0;
   }
 
   @override
-  String? getString(String key) {
+  Future<String?> getString(String key) async {
     return "something";
   }
 }
